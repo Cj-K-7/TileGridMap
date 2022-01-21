@@ -6,31 +6,45 @@ public class PlayableTile : MonoBehaviour
 {
     public int tileX;
     public int tileY;
+    public int checker;
     public TileMap map;
-    public List<GameObject> neighboursList = new List<GameObject>();
+
+    public GameObject beforeX;
+    public GameObject beforeY;
+    public GameObject afterX;
+    public GameObject afterY;
 
     private void Start()
     {
-        GenerateNeighbour();
+        GetNeighbours();
     }
-    public void GenerateNeighbour()
+    public void GenerateProperties()
     {
-        // 플레이어블 타일 주변 인접타일 리스트화
-        if (tileX > 0)
+        
+    }
+    // 플레이어블 타일 주변 인접타일 리스트화 = 진행 가능한 타일
+    void GetNeighbours()
+    {
+        GameObject Neighbour(int x, int y)
         {
-            neighboursList.Add(GameObject.Find("T" + (tileX - 1) + "_" + tileY));
+                return GameObject.Find("Tile(" + x + "," + y + ")");
         }
-        if (tileX < map.mapSizeX - 1)
+
+        if (tileX > 0 && Neighbour(tileX - 1, tileY).GetComponent<PlayableTile>().checker == 0)
         {
-            neighboursList.Add(GameObject.Find("T" + (tileX + 1) + "_" + tileY));
+            beforeX = Neighbour(tileX - 1, tileY);
         }
-        if (tileY > 0)
+        if (tileX < map.mapSizeX - 1 && Neighbour(tileX + 1, tileY).GetComponent<PlayableTile>().checker == 0)
         {
-            neighboursList.Add(GameObject.Find("T" + tileX + "_" + (tileY - 1)));
+            afterX = Neighbour(tileX + 1, tileY);
         }
-        if (tileY < map.mapSizeY - 1)
+        if (tileY > 0 && Neighbour(tileX, tileY - 1).GetComponent<PlayableTile>().checker == 0)
         {
-            neighboursList.Add(GameObject.Find("T" + tileX + "_" + (tileY + 1)));
+            beforeY = Neighbour(tileX, tileY - 1);
+        }
+        if (tileY < map.mapSizeY - 1 && Neighbour(tileX, tileY + 1).GetComponent<PlayableTile>().checker == 0)
+        {
+            afterY = Neighbour(tileX, tileY + 1);
         }
     }
 }
