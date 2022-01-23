@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3454180074625481679}
-  - component: {fileID: 1876567712466463710}
+  - component: {fileID: -2568975823742554022}
   m_Layer: 0
   m_Name: Obs2
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1876567712466463710
+--- !u!114 &-2568975823742554022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,14 +41,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7539901166505914196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a992c50ae0804c640b64feb787418cc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 36c131ef44444064a99ee98dafa2607e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tileX: 0
   tileY: 0
-  checker: 2
+  checker: 1
   map: {fileID: 0}
-  neighboursList: []
+  beforeX: {fileID: 0}
+  beforeY: {fileID: 0}
+  afterX: {fileID: 0}
+  afterY: {fileID: 0}
 --- !u!1001 &7599057347990441447
 PrefabInstance:
   m_ObjectHideFlags: 0
