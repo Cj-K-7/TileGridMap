@@ -1,20 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class World : MonoBehaviour
 {
     public GameObject Character;
+    public Text diceText;
     // Start is called before the first frame update
     void Start()
     {
         spawnCharac();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     void spawnCharac()
     {

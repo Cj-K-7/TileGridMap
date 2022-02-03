@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 // Tile은 각 간격 계산기 입니다.
 public class Tile

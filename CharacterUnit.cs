@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class CharacterUnit : MonoBehaviour
 {
-    PlayableTile pt;
+    TileProperties TP;
     int UnitTileX;
     int UnitTileY;
-    int step;
 
+    public int step;
+    public int dice;
     public GameObject CurrentTile;
-    public GameObject Arrow;
 
     bool start;
     bool isMoving;
@@ -35,40 +34,51 @@ public class CharacterUnit : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 isMoving = true;
-                if (pt.afterX != null)
-                {
-                    UnitTileX++;
-                }
-                else if (pt.afterY != null)
-                {
-                    UnitTileY++;
-                }
-                else if (pt.beforeX != null)
-                {
-                    UnitTileX--;
-                }
-                else if (pt.beforeY != null)
-                {
-                    UnitTileY--;
-                }
-                resetStatus();
-                new WaitForSeconds(3);
-                isMoving = false;
+                //roll Dice
+                step = Random.Range(1, 7);
+                dice = step;
+                StartCoroutine(OneStep());
             }
-        }
 
+        }
     }
     void FixedUpdate()
     {
-            transform.position = Vector3.MoveTowards(transform.position, new Tile(UnitTileX, UnitTileY).Position(), 2f * Time.deltaTime); 
+        transform.position = Vector3.MoveTowards(transform.position, new Tile(UnitTileX, UnitTileY).Position(), 2f * Time.deltaTime);
     }
     //현재 상태 갱신 함수
     void resetStatus()
     {
         CurrentTile = GameObject.Find("Tile(" + UnitTileX + "," + UnitTileY + ")");
-        pt = CurrentTile.GetComponent<PlayableTile>();
+        TP = CurrentTile.GetComponent<TileProperties>();
     }
-
+    IEnumerator OneStep()
+    {
+        while (step > 0)
+        {
+            yield return new WaitUntil(() => transform.position == CurrentTile.transform.position);
+           
+            if (TP.afterX != null)
+            {
+                UnitTileX++;
+            }
+            else if (TP.afterY != null)
+            {
+                UnitTileY++;
+            }
+            else if (TP.beforeX != null)
+            {
+                UnitTileX--;
+            }
+            else if (TP.beforeY != null)
+            {
+                UnitTileY--;
+            }
+            resetStatus();
+            step--;
+        }
+        isMoving = false;
+    }
 }
 
 // 갈 수 잇는 타일의 갯수가 1개 이상일때 선택지 애로우 띄우고 움직이기 시작하면 애로우를 지우는 함수 만들기

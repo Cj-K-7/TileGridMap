@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class TileMap : MonoBehaviour
 {
     public int mapSizeX=10;
@@ -24,7 +25,6 @@ public class TileMap : MonoBehaviour
     {
 
         tile = new int[mapSizeX, mapSizeY];
-
         for (int x = 0; x < mapSizeX; x++)
         {
             for (int y = 0; y < mapSizeY; y++)
@@ -79,10 +79,10 @@ public class TileMap : MonoBehaviour
                 //TileMap 개체를 모든 타일들의 부모로
                 hex_tile.transform.SetParent(this.transform);
                 //플레이어블 타일 변수 :  타입 부여  / X, Y 좌표 부여
-                PlayableTile pt = hex_tile.GetComponent<PlayableTile>();
-                pt.tileX = x;
-                pt.tileY = y;
-                pt.map = this;
+                TileProperties TP = hex_tile.GetComponent<TileProperties>();
+                TP.tileX = x;
+                TP.tileY = y;
+                TP.map = this;
             }
         }
     }
